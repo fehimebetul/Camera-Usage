@@ -46,7 +46,11 @@ namespace Pylon
                 // Create an OpenCV image out of pylon image
                 cv::Mat openCvImage;//me
                 openCvImage = cv::Mat(ptrGrabResult->GetHeight(), ptrGrabResult->GetWidth(), CV_8UC3, (uint8_t *)pylonImage.GetBuffer());//me
-                cv::imwrite("frames/image_"+std::to_string(frameNumber)+".jpg", openCvImage);
+
+                std::stringstream mySS;
+                mySS << "frames/image_" << std::setfill('0') << std::setw(5) << std::to_string(frameNumber) <<".jpg";
+
+                cv::imwrite(mySS.str(), openCvImage);
                 cv::imshow("left camera", openCvImage);
                 frameNumber++;
 

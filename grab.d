@@ -1,1 +1,0 @@
-grab.o: grab.cpp

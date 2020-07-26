@@ -31,7 +31,7 @@ using namespace Basler_GigEStreamParams;
 using namespace std;
 // Number of images to be grabbed.
 static const uint32_t c_countOfImagesToGrab = 10;
-int main(int argc, char* argv[])
+int main_3(int argc, char* argv[])
 {
     double exp_0 = 3000;
     double exp_1 = 9000;
@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
             int64_t increments = (camera.Height.GetMax() - camera.Height.GetMin()) / camera.Height.GetInc();
             // Set the parameters for step 0; quarter height image.
             camera.SequenceSetIndex = 0;
-            //amera.Height.SetValue( camera.Height.GetInc() * (increments / 4));
+            //camera.Height.SetValue( camera.Height.GetInc() * (increments / 4));
              camera.ExposureTimeAbs.SetValue(exp_0);
             camera.SequenceSetStore.Execute();
             // Set the parameters for step 1; half height image.

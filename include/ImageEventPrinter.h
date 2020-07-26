@@ -7,6 +7,7 @@
 #include <pylon/GrabResultPtr.h>
 #include <iostream>
 #include "opencv2/opencv.hpp"
+#include <sstream>
 
 namespace Pylon
 {
@@ -15,7 +16,7 @@ namespace Pylon
     class CImageEventPrinter : public CImageEventHandler
     {
     public:
-
+        int frameNumber = 0;
         virtual void OnImagesSkipped( CInstantCamera& camera, size_t countOfSkippedImages)
         {
             std::cout << "OnImagesSkipped event for device " << camera.GetDeviceInfo().GetModelName() << std::endl;
@@ -45,8 +46,9 @@ namespace Pylon
                 // Create an OpenCV image out of pylon image
                 cv::Mat openCvImage;//me
                 openCvImage = cv::Mat(ptrGrabResult->GetHeight(), ptrGrabResult->GetWidth(), CV_8UC3, (uint8_t *)pylonImage.GetBuffer());//me
+                cv::imwrite("frames/image_"+std::to_string(frameNumber)+".jpg", openCvImage);
                 cv::imshow("left camera", openCvImage);
-
+                frameNumber++;
 
             }
             else
